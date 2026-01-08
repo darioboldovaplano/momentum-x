@@ -41,27 +41,29 @@ L’utilisation de données issues de Yahoo Finance introduit des risques non n�
 - qualité variable des prix ajustés.
 
 Ces problèmes réduisent la taille effective des échantillons et fragilisent l’estimation des paramètres statistiques, ce qui peut altérer la robustesse des résultats empiriques.  
+
 **Dans le cadre de Momentum-X, ces limites se traduisent concrètement par une réduction du nombre d’actifs exploitables dans certains univers thématiques et par une instabilité accrue des signaux de sélection.**
 
 ---
 
 ### 2. Biais de temporalité (look-ahead bias)
 
-Toute absence de séparation stricte entre la date de calcul du signal et la date d’exécution peut générer un **biais de regard vers l’avant**, conduisant à une surestimation artificielle des performances observées et à une invalidation des résultats empiriques.
+Toute absence de séparation stricte entre la date de calcul du signal et la date d’exécution peut générer un biais de regard vers l’avant, conduisant à une surestimation artificielle des performances observées et à une invalidation des résultats empiriques.
 
 ---
 
 ### 3. Biais de survie et biais de sélection
 
 Les univers d’actifs disponibles aujourd’hui ne reflètent pas nécessairement l’ensemble des opportunités passées.  
-L’exclusion d’actifs disparus ou peu liquides conduit à un **biais de survie** qui surestime la performance historique.
+L’exclusion d’actifs disparus ou peu liquides conduit à un biais de survie qui surestime la performance historique.
 
 ---
 
 ### 4. Coûts de transaction et rotation de portefeuille
 
-Les stratégies momentum impliquent un **turnover élevé**, particulièrement en période de stress de marché.  
-En l’absence d’une modélisation réaliste des frais de transaction, des spreads bid-ask et de l’impact de marché, les performances restent largement optimistes.  
+Les stratégies momentum impliquent un turnover élevé, particulièrement en période de stress de marché.  
+En l’absence d’une modélisation réaliste des frais de transaction, des spreads bid-ask et de l’impact de marché, les performances restent largement optimistes. 
+
 **Dans une implémentation réelle, ce point constitue l’un des principaux déterminants de la viabilité économique de la stratégie.**
 
 ---
@@ -82,8 +84,10 @@ Comme le démontrent **DeMiguel, Garlappi & Uppal (2009)**, l’optimisation moy
 
 ### 7. Concentration et risque de crowding
 
-Les stratégies momentum sont sujettes à des phénomènes d’**encombrement** et à des corrélations élevées en période de crise.  
-Ces effets amplifient les drawdowns lors des phases de retournement de marché, comme l’illustrent les **momentum crashes** documentés par **Daniel & Moskowitz (2016)**.
+Les stratégies momentum sont sujettes à des phénomènes d’encombrement et à des corrélations élevées en période de crise.
+**Daniel & Moskowitz (2016)** montrent que les stratégies momentum subissent des pertes extrêmes lors des phases de retournement brutal des marchés, en particulier après des périodes prolongées de baisse, lorsque les actifs précédemment gagnants deviennent soudainement les principaux perdants.
+
+Ce risque de crash est structurel : il est amplifié par la similarité des positions détenues par les investisseurs et par l’usage fréquent du levier, ce qui déclenche des ventes forcées et engendre une dynamique d’amplification systémique des pertes.
 
 ---
 
