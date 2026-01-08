@@ -25,8 +25,10 @@ Application Streamlit de stratégie d’investissement **Cœur-Satellites** avec
 pip install -r requirements.txt
 streamlit run main.py
 
-## 🌐 Mode d’emploi (pas à pas)
-🧠 1. Onglet “Profil investisseur”
+```
+
+## 🌐 Mode d’emploi 
+1. Onglet “Profil investisseur”
 
 🎯 Objectif : Définir ton profil de risque via un mini questionnaire.
 
