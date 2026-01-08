@@ -1,4 +1,4 @@
-# 📓 Journal de Conception - Momentum-X
+# 📓 Notebook - Momentum-X
 
 Ce document retrace les étapes clés, les essais, erreurs et décisions prises lors du développement de l'application Momentum-X.
 
