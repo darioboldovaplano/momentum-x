@@ -75,12 +75,6 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 def pct_returns(prices: pd.DataFrame) -> pd.DataFrame:
     return prices.pct_change().replace([np.inf, -np.inf], np.nan).dropna(how="all")
 
-# def momentum_score(prices: pd.DataFrame, lookback_days: int = 126) -> pd.Series:
-#     if prices.empty or len(prices) <= lookback_days:
-#         return pd.Series(index=prices.columns, dtype=float)
-#     mom = prices.iloc[-1] / prices.iloc[-1 - lookback_days] - 1.0
-#     return mom.replace([np.inf, -np.inf], np.nan)
-
 def momentum_score(prices: pd.DataFrame, lookback_days: int = 126) -> pd.Series: #fonction plus solide on ajuste le momentum au risque
     """
     Risk-adjusted momentum:
@@ -111,35 +105,6 @@ def annualize_stats(daily_returns: pd.Series) -> dict:
     vol = daily_returns.std() * np.sqrt(252)
     sharpe = (mu / vol) if vol and vol > 0 else np.nan
     return {"ret": mu, "vol": vol, "sharpe": sharpe}
-
-# def clamp_weights(w: np.ndarray) -> np.ndarray:
-#     w = np.maximum(w, 0)
-#     s = w.sum()
-#     return w / s if s > 0 else w
-
-# def optimize_mean_variance(mu: np.ndarray, cov: np.ndarray, risk_aversion: float,
-#                            max_weight: float = 0.40, min_weight=0.0) -> np.ndarray: #on voudrait rajouter un poids minimum dans l'optimisation
-#     n = len(mu)
-#     if n == 1:
-#         return np.array([1.0])
-
-#     mu = np.nan_to_num(mu, nan=0.0)
-#     cov = np.nan_to_num(cov, nan=0.0)
-
-#     def obj(w):
-#         return -(mu @ w - risk_aversion * (w @ cov @ w))
-
-#     cons = [{"type": "eq", "fun": lambda w: np.sum(w) - 1.0}]
-#     bounds = [(0.0, max_weight) for _ in range(n)]
-#     x0 = np.ones(n) / n
-
-#     res = minimize(obj, x0, bounds=bounds, constraints=cons, method="SLSQP")
-#     if not res.success:
-#         return x0
-#     return clamp_weights(res.x)
-
-# import numpy as np
-# from scipy.optimize import minimize
 
 def clamp_weights(w: np.ndarray) -> np.ndarray:
     # Nettoie les petits artefacts numériques (ex: -1e-12) et renormalise
@@ -356,16 +321,6 @@ with tab_kyc:
     prof = st.session_state.get("risk_profile", None)
 
     c1, c2, c3 = st.columns(3)
-
-    # def card(title, subtitle, desc, active=False): #ancienne version
-    #     cls = "risk-card risk-card--active" if active else "risk-card"
-    #     return f"""
-    #     <div class="{cls}">
-    #         <div class="risk-title">{title}</div>
-    #         <div class="risk-level">{subtitle}</div>
-    #         <p class="muted">{desc}</p>
-    #     </div>
-    #     """
     
     def card(title, subtitle, desc, theme="neutral", active=False):
         cls = f"risk-card risk-card--{theme}"
