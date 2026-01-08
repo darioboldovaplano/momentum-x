@@ -1,105 +1,89 @@
-# 📓 Notebook - Momentum-X
+# Notebook de Conception du Projet Momentum-X
 
-Ce document retrace les étapes clés, les essais, erreurs et décisions prises lors du développement de l'application Momentum-X.
+## Objectif du projet
 
----
+Ce projet visait à concevoir une application Streamlit permettant de générer un portefeuille d'investissement selon une logique Cœur / Satellites, avec sélection dynamique par **momentum** et optimisation basée sur le profil de risque de l’utilisateur.
 
-## ✅ Objectif du projet
+## Idée initiale
 
-Concevoir une application Streamlit permettant de créer un portefeuille dynamique ETF (cœur) + actions thématiques (satellites) en fonction :
+* Créer une interface claire, éducative et fonctionnelle permettant à un investisseur non-expert de construire un portefeuille optimisé en fonction de son appétence au risque.
+* Combiner la simplicité des ETFs "cœur" à une sélection dynamique d’actifs satellites plus tactiques.
+* L’inspiration est venue des portefeuilles en gestion pilotée proposés par certains robo-advisors, mais en apportant un degré plus élevé de transparence et de personnalisation.
 
-* Du **profil de risque** utilisateur (via questionnaire KYC)
-* D'une **sélection momentum Top K**
-* D'une **optimisation moyenne-variance**
+## Étapes de conception
 
----
+### 1. Profilage utilisateur (KYC simplifié)
 
-## ⚖️ Structure initiale envisagée
+* Nous avons conçu un petit questionnaire à 5 questions pour capter rapidement l’appétence au risque de l’utilisateur.
+* Ce profil détermine deux paramètres clés :
 
-### Modules principaux prévus :
+  * Le poids du **cœur** dans le portefeuille
+  * L’**aversion au risque** utilisée dans les optimisations quadratiques.
 
-1. **KYC / Questionnaire** → profil de risque
-2. **Sélection ETF cœur** → 1 ETF via Yahoo Finance
-3. **Choix satellites thématiques** (Tech, Banques, etc.)
-4. **Filtrage momentum Top K**
-5. **Optimisation intra- et inter-satellite**
-6. **Visualisation + export liste achat**
+### 2. ETFs cœur : choix et évolutions
 
----
+* **Hypothèse initiale** : proposer un unique ETF Euro Stoxx 50 (CSSX5E) comme cœur du portefeuille.
+* **Problème identifié** : trop restrictif pour certains utilisateurs souhaitant une exposition plus globale ou américaine.
+* **Évolution** : nous avons élargi le choix avec d’autres ETFs cœur comme le MSCI World (SWDA) et le S&P 500 (CSPX).
+* **Défi rencontré** : certains suffixes sur Yahoo Finance (.MI, .SW, .L) ne sont pas toujours disponibles selon les périodes, ce qui nous a obligés à tester plusieurs variantes pour chaque ETF cœur.
 
-## ❌ Problèmes rencontrés et ajustements
+### 3. Satellites : sélection et complexité
 
-### 1. **Récupération des prix (Yahoo Finance)**
+* Plusieurs univers thématiques définis (Tech, Énergie, Défense, Banques, Métaux, Marchés émergents).
+* Chaque satellite est constitué d’une liste d’actifs (souvent > 50 tickers).
+* **Défi majeur** :
 
-* **Problème :** De nombreux tickers renvoient des NaN / données vides
-* **Solutions essayées :**
+  * Initialement, nous avons essayé d'extraire les composantes des indices thématiques via Bloomberg.
+  * Les tickers Bloomberg étant incompatibles avec Yahoo Finance, il a fallu retrouver les correspondances exactes pour chacun d’eux, souvent manuellement.
+  * Cette **conversion des tickers** s’est révélée **extrêmement longue et délicate**.
 
-  * Multiples suffixes (.SW, .MI, .L, .NS...) pour ETF internationaux
-  * Nettoyage des colonnes vides à chaque fetch
-* **Décision :** filtrer systématiquement les colonnes vides, fallback sur autre ticker si le principal échoue
+### 4. Sélection par Momentum
 
-### 2. **Manque de profondeur sur certains satellites**
+* Pour chaque satellite sélectionné, on applique un ranking momentum (performance sur 63, 126 ou 252 jours).
+* L’utilisateur peut choisir le nombre d’actifs à retenir (Top K).
 
-* **Ex :** certains satellites comme “Defense” ou “Energy” ont peu de titres exploitables (données manquantes ou incohérentes)
-* **Décision :** Ne garder que les satellites avec au moins 2 titres exploitables (Top K minimum = 2)
+### 5. Optimisation intra-satellite
 
-### 3. **Optimisation moyenne-variance trop sensible**
+* Les Top K actifs sélectionnés sont pondérés via une optimisation moyenne-variance (maximisation du Sharpe ratio sous contraintes).
+* Limitations observées :
 
-* **Problème :** Risque de surajustement si la covariance est mal estimée (matrice singulière)
-* **Tentatives :**
+  * Certaines périodes avec peu de données entraînent des matrices de covariance peu fiables.
+  * Des satellites comme Banques ou Défense ont parfois très peu d’actifs valides (manque de données Yahoo).
 
-  * Ajout d'une élévation diagonale (ridge-like)
-  * Nettoyage via `np.nan_to_num`
-  * Simplification avec matrice identité si trop peu de data
+### 6. Optimisation inter-satellite
 
-### 4. **Cumul des poids incorrect**
+* Une seconde couche d’optimisation moyenne-variance est appliquée pour combiner les satellites sélectionnés.
+* La pondération finale est le produit : poids satellite × poids intra-satellite.
 
-* **Problème :** Somme finale des poids différait de 1 (problèmes d'arrondis ou poids négatifs)
-* **Fix :** Utilisation d'une fonction `clamp_weights` pour assurer la somme à 1 et forcer positivité
+### 7. Visualisation et export
 
-### 5. **Visualisation incomplète**
+* Visualisation des performances (performance cumulée, Sharpe, volatilité).
+* Représentation donut cœur/satellites.
+* Liste d’achat finale (tickers + poids).
+* Export CSV disponible.
 
-* **Souci initial :** noms de tickers peu explicites
-* **Solution :** ajout d'une fonction `get_names()` pour récupérer les noms longs via API Yahoo
-* **Limite :** trop lent si appel massif, on l’a limité à la vue finale
+## Limitations identifiées
 
----
+* Dépendance forte à Yahoo Finance (fiabilité variable, tickers manquants).
+* Le modèle d’optimisation moyenne-variance reste très simpliste :
 
-## 📊 Choix finaux retenus
+  * Hypothèse de normalité des rendements
+  * Pas de prise en compte du turnover, ni des coûts de transaction.
+* Les pondérations très optimisées peuvent manquer de robustesse hors-échantillon.
 
-* KYC → calcule un score [5–25] → associe à un profil : Prudent / Équilibré / Dynamique
-* Ce profil ajuste :
+## Possibilités futures (non implémentées)
 
-  * Aversion au risque pour optimisation
-  * Répartition Cœur / Satellites
-* Satellite : Top K par momentum → optim intragroupe → optim intergroupe
-* Cumul final → poids à 2 décimales, exportable en CSV
+* Ajout d’autres méthodes d’optimisation :
 
----
+  * Min variance
+  * Max diversification
+  * Hierarchical Risk Parity
+* Backtest rolling avec recalibrage mensuel
+* Affichage interactif des positions dans un portefeuille virtuel
 
-## 🔄 Idées non retenues ou postposées
+## Conclusion
 
-* Backtesting Rolling (non nécessaire ici)
-* Optimisation à plusieurs objectifs (Sharpe, Max Diversification...)
-* Intégration dynamique du min weight (complexité)
-
----
-
-## 📔 Lessons Learned
-
-* Yahoo Finance a beaucoup de limites : vérifier chaque ticker
-* Moins de thématiques mais plus robustes = meilleur résultat
-* Une bonne visualisation aide à valider les résultats
-* Le KYC amène une vraie personnalisation utile
-
----
-
-## 🔍 Pistes futures
-
-* Backtest rolling + rebalance mensuel
-* Amélioration UX : sauvegarde préférences, plus de thèmes visuels
-* Version API ou télégram bot ?
-* Ajout de règles ESG ou contraintes thématiques
+Ce projet nous a permis d'explorer plusieurs dimensions d'un portefeuille quantitatif accessible : profilage utilisateur, sélection algorithmique, et optimisation. Malgré certaines limitations techniques, le résultat est une application éducative et visuellement intuitive, offrant un vrai gain pédagogique pour les utilisateurs novices comme avancés.
 
 ---
 
