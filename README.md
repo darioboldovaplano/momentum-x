@@ -28,8 +28,8 @@ streamlit run main.py
 ```
 
 ## 🌐 Mode d’emploi 
-1. Onglet “Profil investisseur”
-
+**1. Onglet “Profil investisseur”
+**
 🎯 Objectif : Définir ton profil de risque via un mini questionnaire.
 
 Réponds aux 5 questions (horizon, réaction au risque, etc.)
@@ -38,74 +38,75 @@ Clique sur “Calculer mon profil de risque”
 
 Tu obtiens un des profils suivants :
 
-🟢 Prudent
+- 🟢 Prudent
 
-🔵 Équilibré
+- 🔵 Équilibré
 
-🔴 Dynamique
+- 🔴 Dynamique
 
 👉 Ce profil ajuste automatiquement :
 
-L’allocation entre cœur (ETF) et satellites (actions)
+- L’allocation entre cœur (ETF) et satellites (actions)
 
-Le niveau d’aversion au risque pour l’optimisation
+- Le niveau d’aversion au risque pour l’optimisation
 
-📊 2. Onglet “Stratégie Momentum-X”
-
+**2. Onglet “Stratégie Momentum-X”
+**
 🎯 Objectif : Construire ton portefeuille optimal.
 
-a. Paramètres à gauche (sidebar)
+  a. Paramètres à gauche (sidebar)
 
-Date de départ du backtest
+    - Date de départ du backtest
 
-Lookback momentum (63 / 126 / 252 jours)
+    - Lookback momentum (63 / 126 / 252 jours)
 
-Top K : nombre d’actions sélectionnées par satellite
+    - Top K : nombre d’actions sélectionnées par satellite
 
-Contraintes de poids :
+    - Contraintes de poids :
 
-par actif (intra-satellite)
+        par actif (intra-satellite)
 
-par satellite (inter-satellites)
+        par satellite (inter-satellites)
+  
+  b. Cœur ETF
 
-b. Cœur ETF
+    - Choisis ton ETF principal (ex : MSCI World, S&P500, etc.)
 
-Choisis ton ETF principal (ex : MSCI World, S&P500, etc.)
+    - Active (ou non) la gestion automatique selon ton profil
 
-Active (ou non) la gestion automatique selon ton profil
+  c. Satellites
 
-c. Satellites
+    - Clique sur "Ajouter" sous les thèmes qui t'intéressent :
 
-Clique sur "Ajouter" sous les thèmes qui t'intéressent :
+        Tech / IA
 
-Tech / IA
+        Banques
 
-Banques
+        Énergie
 
-Énergie
+        Défense
+        
+        Matières premières (futures)
+        
+        Marchés émergents
 
-Défense
-
-Matières premières (futures)
-
-Marchés émergents
-
-Chaque thème contient plusieurs actions sélectionnables
+  Chaque thème contient plusieurs actions sélectionnables
 
 d. Sélection & Optimisation
 
-Les meilleurs actifs sont sélectionnés automatiquement (Top K momentum)
+  Les meilleurs actifs sont sélectionnés automatiquement (Top K momentum)
 
-L’optimisation moyenne-variance est effectuée :
+  L’optimisation moyenne-variance est effectuée :
 
-Intra-satellite : pondération des actions d’un thème
+    - Intra-satellite : pondération des actions d’un thème
 
-Inter-satellites : pondération entre les thèmes choisis
+    - Inter-satellites : pondération entre les thèmes choisis
 
-Données récupérées depuis Yahoo Finance
+**Données récupérées depuis Yahoo Finance
+**
 
-📈 3. Résultats
-
+**📈 3. Résultats
+**
 Graphique de répartition : cœur vs satellites
 
 Courbe de performance cumulée
