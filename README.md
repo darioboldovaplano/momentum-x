@@ -27,102 +27,57 @@ streamlit run main.py
 
 ```
 
-## 🌐 Mode d’emploi 
-**1. Onglet “Profil investisseur”
-**
-🎯 Objectif : Définir ton profil de risque via un mini questionnaire.
+## 🌐 Mode d’emploi (pas à pas)
 
-Réponds aux 5 questions (horizon, réaction au risque, etc.)
+### 🧠 1. Onglet “Profil investisseur”
 
-Clique sur “Calculer mon profil de risque”
+🎯 **Objectif** : Définir ton profil de risque via un mini questionnaire.
 
-Tu obtiens un des profils suivants :
+- Réponds aux 5 questions (horizon, réaction au risque, etc.)
+- Clique sur **“Calculer mon profil de risque”**
+- Tu obtiens l’un des profils suivants :
+  - Prudent
+  - Équilibré
+  - Dynamique
 
-- 🟢 Prudent
+➡️ Ce profil influencera automatiquement l’allocation entre le Cœur (ETF) et les Satellites (actions à fort momentum).
 
-- 🔵 Équilibré
+---
 
-- 🔴 Dynamique
+### 📊 2. Onglet “Stratégie Momentum-X”
 
-👉 Ce profil ajuste automatiquement :
+🎯 **Objectif** : Construire un portefeuille optimal cœur + satellites.
 
-- L’allocation entre cœur (ETF) et satellites (actions)
+#### a) Paramètres (à gauche)
 
-- Le niveau d’aversion au risque pour l’optimisation
+- Choisis la date de départ du backtest
+- Sélectionne le lookback momentum (63j, 126j, 252j)
+- Définis le nombre d’actions (Top K) par satellite
+- Ajuste les contraintes de poids (par actif et par satellite)
 
-**2. Onglet “Stratégie Momentum-X”
-**
-🎯 Objectif : Construire ton portefeuille optimal.
+#### b) Cœur (ETF)
 
-  a. Paramètres à gauche (sidebar)
+- Choisis un ETF EuroStoxx 50 dans la liste proposée
+- Il représentera la base défensive du portefeuille
 
-    - Date de départ du backtest
+#### c) Satellites (thématiques)
 
-    - Lookback momentum (63 / 126 / 252 jours)
+- Clique sur **Ajouter** les satellites que tu veux inclure
+- Un résumé s’affiche sous chaque carte (US Equity, Défense, EM, etc.)
 
-    - Top K : nombre d’actions sélectionnées par satellite
+#### d) Sélection momentum & optimisation
 
-    - Contraintes de poids :
+- Les meilleurs titres sont automatiquement sélectionnés (Top K)
+- Optimisation **intra-satellite** : répartition à l’intérieur d’un thème
+- Optimisation **inter-satellites** : poids alloués à chaque satellite
+- Données extraites de Yahoo Finance
 
-        par actif (intra-satellite)
+---
 
-        par satellite (inter-satellites)
-  
-  b. Cœur ETF
+### 📈 3. Résultats
 
-    - Choisis ton ETF principal (ex : MSCI World, S&P500, etc.)
-
-    - Active (ou non) la gestion automatique selon ton profil
-
-  c. Satellites
-
-    - Clique sur "Ajouter" sous les thèmes qui t'intéressent :
-
-        Tech / IA
-
-        Banques
-
-        Énergie
-
-        Défense
-        
-        Matières premières (futures)
-        
-        Marchés émergents
-
-  Chaque thème contient plusieurs actions sélectionnables
-
-d. Sélection & Optimisation
-
-  Les meilleurs actifs sont sélectionnés automatiquement (Top K momentum)
-
-  L’optimisation moyenne-variance est effectuée :
-
-    - Intra-satellite : pondération des actions d’un thème
-
-    - Inter-satellites : pondération entre les thèmes choisis
-
-**Données récupérées depuis Yahoo Finance
-**
-
-**📈 3. Résultats
-**
-Graphique de répartition : cœur vs satellites
-
-Courbe de performance cumulée
-
-Tableau des performances :
-
-Bloc Cœur
-
-Bloc Satellites
-
-Portefeuille global
-
-✅ Liste d'achat finale :
-
-Tickers des actifs sélectionnés
-
-Poids de chaque actif
-
-Téléchargement du fichier CSV prêt à l’emploi
+- Graphique donut : répartition cœur / satellites
+- Tableau : top titres sélectionnés par momentum
+- Détail par satellite : rendement, volatilité, momentum
+- ✅ Liste d’achat finale (tickers + poids optimisés)
+- 💾 Export CSV disponible
