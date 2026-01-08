@@ -29,7 +29,7 @@ streamlit run main.py
 
 ## 🌐 Mode d’emploi (pas à pas)
 
-### 🧠 1. Onglet “Profil investisseur”
+### 1. Onglet “Profil investisseur”
 
 🎯 **Objectif** : Définir ton profil de risque via un mini questionnaire.
 
@@ -44,7 +44,7 @@ streamlit run main.py
 
 ---
 
-### 📊 2. Onglet “Stratégie Momentum-X”
+### 2. Onglet “Stratégie Momentum-X”
 
 🎯 **Objectif** : Construire un portefeuille optimal cœur + satellites.
 
@@ -74,10 +74,10 @@ streamlit run main.py
 
 ---
 
-### 📈 3. Résultats
+### 3. Résultats
 
 - Graphique donut : répartition cœur / satellites
 - Tableau : top titres sélectionnés par momentum
 - Détail par satellite : rendement, volatilité, momentum
-- ✅ Liste d’achat finale (tickers + poids optimisés)
+- Liste d’achat finale (tickers + poids optimisés)
 - 💾 Export CSV disponible
