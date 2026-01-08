@@ -78,7 +78,8 @@ Sans politique de couverture explicite, il devient difficile d’isoler la perfo
 ### 6. Fragilité de l’optimisation moyenne-variance
 
 Comme le démontrent **DeMiguel, Garlappi & Uppal (2009)**, l’optimisation moyenne-variance est extrêmement sensible aux erreurs d’estimation et peut conduire à des allocations instables ou économiquement sous-optimales malgré son élégance théorique.  
-**Dans Momentum-X, cette fragilité se manifeste par une forte sensibilité des poids optimisés aux fenêtres d’estimation, aux contraintes imposées et aux variations du régime de marché, ce qui justifie l’introduction de bornes strictes et de mécanismes de stabilisation des allocations.**
+
+Dans Momentum-X, cette fragilité se manifeste par une forte sensibilité des poids optimisés aux fenêtres d’estimation, aux contraintes imposées et aux variations du régime de marché, ce qui justifie l’introduction de bornes strictes et de mécanismes de stabilisation des allocations.
 
 ---
 
@@ -111,4 +112,5 @@ Plusieurs axes de recherche peuvent améliorer la robustesse de ce type de strat
 Ce projet confirme l’intérêt théorique et empirique du facteur momentum, tout en mettant en lumière les risques structurels et opérationnels associés à son implémentation réelle.
 
 Toute exploitation sérieuse de cette anomalie de marché nécessite une discipline méthodologique rigoureuse, une gestion prudente du risque et une évaluation empirique robuste avant toute application en conditions réelles.  
-**La validité économique de la stratégie demeure conditionnée à sa capacité à maintenir ses propriétés hors échantillon et sous différents régimes de marché, ce qui constitue un critère de falsification essentiel de son intérêt réel.**
+
+La validité économique de la stratégie demeure conditionnée à sa capacité à maintenir ses propriétés hors échantillon et sous différents régimes de marché, ce qui constitue un critère de falsification essentiel de son intérêt réel.
