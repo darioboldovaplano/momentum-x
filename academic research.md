@@ -107,7 +107,7 @@ Plusieurs axes de recherche peuvent améliorer la robustesse de ce type de strat
 
 ---
 
-▸ Publications professionnelles et exemples de mise en œuvre
+## ▸Publications professionnelles et exemples de mise en œuvre
 
 Le monde professionnel de la gestion d’actifs a également largement documenté et adopté l’intégration du facteur momentum dans des architectures de portefeuille de type cœur–satellites, confirmant la cohérence économique de l’approche étudiée dans ce projet.
 
