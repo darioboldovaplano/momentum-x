@@ -96,7 +96,7 @@ Ce risque de crash est structurel : il est amplifié par la similarité des posi
 
 Plusieurs axes de recherche peuvent améliorer la robustesse de ce type de stratégie :
 
-- intégration d’un **ciblage de volatilité** (Barroso & Santa-Clara, 2015) ;
+- intégration d’un ciblage de volatilité (Barroso & Santa-Clara, 2015) ;
 - ajout de filtres de tendance macroéconomique ;
 - recours à des méthodes d’allocation plus robustes  
   (risk parity, shrinkage covariance, minimum variance) ;
@@ -104,6 +104,36 @@ Plusieurs axes de recherche peuvent améliorer la robustesse de ce type de strat
 - validation hors échantillon et analyses de sensibilité approfondies.
 
 **En pratique, toute mise en production nécessiterait également un cadre de gouvernance du modèle, incluant le suivi continu des performances, le contrôle des dérives de risque et la révision périodique des hypothèses de construction du portefeuille.**
+
+---
+
+▸ Publications professionnelles et exemples de mise en œuvre
+
+Le monde professionnel de la gestion d’actifs a également largement documenté et adopté l’intégration du facteur momentum dans des architectures de portefeuille de type cœur–satellites, confirmant la cohérence économique de l’approche étudiée dans ce projet.
+
+**Symmetry Partners / Panoramic Funds (2025)**  
+Dans une note de stratégie publiée par sa filiale Panoramic Funds, la société de gestion américaine Symmetry Partners présente l’utilisation de son ETF sectoriel momentum *(ticker : SMOM)* comme composante satellite d’un portefeuille diversifié.  
+Ils recommandent qu’une allocation cœur–satellite typique consacre environ 10 % à 30 % du portefeuille à une stratégie momentum sectorielle, le reste constituant le cœur diversifié.  
+L’objectif explicite est d’ajouter une **surcouche dynamique et disciplinée** autour d’un cœur indiciel large afin de rechercher un excès de rendement sans altérer l’allocation stratégique globale.  
+En pratique, cela revient à adosser un sleeve” momentum autour d’un cœur passif (par exemple un indice actions mondial) pour capter la rotation des secteurs les plus porteurs, tout en conservant une structure principale stable.  
+Source : panoramicfunds.com
+
+**Invesco / Analyse Morningstar relayée par Kiplinger (2024)**  
+Nick Kalivas, responsable de la stratégie factorielle et des portefeuilles noyau chez Invesco, souligne que le momentum doit être considéré comme une stratégie satellite et non comme le cœur d’un portefeuille diversifié.  
+Les fonds momentum présentent des profils de performance souvent décorrélés, alternant périodes de forte surperformance et phases de sous-performance marquées, notamment face aux styles value.  
+Une allocation modérée au momentum permet ainsi d’améliorer la diversification globale et de bénéficier des tendances favorables, tout en limitant l’exposition aux retournements brutaux.  
+Source : kiplinger.com
+
+**Guide Dual Momentum – Approche francophone (2023)**  
+Dans la littérature francophone, un guide d’investissement momentum décrit une mise en œuvre fréquente combinant un cœur passif mondial (par exemple un ETF MSCI World) avec un satellite géré en Dual Momentum ou Accelerated Dual Momentum, dans le but « d’améliorer le profil rendement/drawdown » du portefeuille.  
+Le guide suggère généralement une taille de satellite momentum comprise entre 10 % et 40 % de l’exposition actions, selon la tolérance de l’investisseur aux rotations et à la discipline nécessaire.  
+Cette combinaison vise à associer la stabilité structurelle du cœur indiciel avec la réactivité tactique du satellite momentum, capable d’ajuster rapidement l’allocation ou de passer en liquidités lors de phases de marché défavorables.  
+Source : dual-momentum.fr
+
+**Nagelmackers – Philosophie d’investissement (2023)**  
+La banque privée belge Nagelmackers intègre explicitement l’approche cœur–satellite** et l’investissement factoriel, incluant le facteur Momentum, comme piliers complémentaires de sa gestion de portefeuille.  
+Le cœur-satellite permet d’arbitrer entre stabilité et opportunité, tandis que l’investissement factoriel vise à améliorer le rendement ajusté du risque par la sélection de caractéristiques éprouvées *(momentum, value, qualité, etc.)*.  
+Cette articulation illustre la place du momentum dans la gestion professionnelle moderne : il est principalement utilisé comme composante satellite pour renforcer la performance et la diversification, plutôt que comme stratégie isolée autonome.
 
 ---
 
