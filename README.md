@@ -2,89 +2,124 @@
 
 Application Streamlit de stratégie d’investissement **Cœur-Satellites** avec sélection dynamique par **momentum**.
 
+---
+
 ## 📁 Contenu
 
-- Questionnaire KYC pour définir le profil investisseur
-- Allocation cœur ETF + satellites (actions / futures)
-- Sélection momentum Top K par satellite
-- Optimisation intra- et inter-satellite
-- Visualisation des performances
-- Export CSV de la liste d'achat
+- Questionnaire KYC pour définir le profil investisseur  
+- Allocation cœur ETF + satellites (actions / futures)  
+- Sélection momentum Top K par satellite  
+- Optimisation intra- et inter-satellite  
+- Visualisation des performances  
+- Export CSV de la liste d'achat  
 
-## ▶️ Lancer l'application
+---
+
+## ▶️ Installation & Lancement
+
+1. Ouvre un terminal (PowerShell ou Git Bash)
+2. Clone ce dépôt ou crée un dossier et place le fichier `main.py` + `requirements.txt` à la racine
+3. Dans le terminal :
 
 ```bash
 pip install -r requirements.txt
 streamlit run main.py
 
-##🌐 Utilisation de l’application web
+## 🌐 Mode d’emploi (pas à pas)
+🧠 1. Onglet “Profil investisseur”
 
-Une fois l'application Streamlit lancée, voici comment l’utiliser pas à pas :
+🎯 Objectif : Définir ton profil de risque via un mini questionnaire.
 
-1. Onglet “Profil investisseur”
+Réponds aux 5 questions (horizon, réaction au risque, etc.)
 
-Objectif : Définir ton profil de risque via un mini questionnaire.
+Clique sur “Calculer mon profil de risque”
 
-Réponds aux 5 questions (horizon, réaction au risque, etc.).
+Tu obtiens un des profils suivants :
 
-Clique sur “Calculer mon profil de risque”.
+🟢 Prudent
 
-Un profil te sera attribué automatiquement :
-Prudent, Équilibré, ou Dynamique.
+🔵 Équilibré
 
-Ce profil influencera l’allocation entre le Cœur (ETF) et les Satellites (actions à fort momentum).
+🔴 Dynamique
 
-2. Onglet “Stratégie Momentum-X”
+👉 Ce profil ajuste automatiquement :
 
-Objectif : Construire un portefeuille optimal cœur + satellites.
+L’allocation entre cœur (ETF) et satellites (actions)
 
-a. Paramètres dans la sidebar (gauche) :
+Le niveau d’aversion au risque pour l’optimisation
 
-Choisis la date de départ du backtest.
+📊 2. Onglet “Stratégie Momentum-X”
 
-Sélectionne le lookback momentum (63j, 126j, 252j).
+🎯 Objectif : Construire ton portefeuille optimal.
 
-Choisis le nombre d’actions (Top K) à sélectionner par satellite.
+a. Paramètres à gauche (sidebar)
 
-Ajuste les contraintes de poids :
-poids max par actif et par satellite.
+Date de départ du backtest
 
-b. Cœur :
+Lookback momentum (63 / 126 / 252 jours)
 
-Sélectionne ton ETF principal (S&P500, MSCI World, etc.).
+Top K : nombre d’actions sélectionnées par satellite
 
-Sois libre de laisser l’application gérer automatiquement l’allocation (selon ton profil) ou la régler manuellement.
+Contraintes de poids :
 
-c. Satellites :
+par actif (intra-satellite)
 
-Clique sur “Ajouter” sous les thèmes qui t'intéressent (Tech, Défense, Énergie...).
+par satellite (inter-satellites)
 
-Un résumé des actifs disponibles est affiché sous chaque carte.
+b. Cœur ETF
 
-Tu peux en choisir plusieurs.
+Choisis ton ETF principal (ex : MSCI World, S&P500, etc.)
 
-d. Sélection momentum et optimisation :
+Active (ou non) la gestion automatique selon ton profil
 
-Les actions à plus fort momentum sont sélectionnées automatiquement (Top K).
+c. Satellites
 
-Une optimisation est faite intra-satellite puis entre satellites pour maximiser le couple rendement/risque.
+Clique sur "Ajouter" sous les thèmes qui t'intéressent :
 
-Tous les calculs sont faits à partir des données Yahoo Finance.
+Tech / IA
 
-3. Résultats
+Banques
 
-Affichage du portefeuille final avec graphique de répartition.
+Énergie
 
-Courbe de performance cumulée.
+Défense
 
-Tableau comparatif des performances :
+Matières premières (futures)
 
-Cœur
+Marchés émergents
 
-Satellites
+Chaque thème contient plusieurs actions sélectionnables
+
+d. Sélection & Optimisation
+
+Les meilleurs actifs sont sélectionnés automatiquement (Top K momentum)
+
+L’optimisation moyenne-variance est effectuée :
+
+Intra-satellite : pondération des actions d’un thème
+
+Inter-satellites : pondération entre les thèmes choisis
+
+Données récupérées depuis Yahoo Finance
+
+📈 3. Résultats
+
+Graphique de répartition : cœur vs satellites
+
+Courbe de performance cumulée
+
+Tableau des performances :
+
+Bloc Cœur
+
+Bloc Satellites
 
 Portefeuille global
 
-Liste d'achat finale : tickers + poids
+✅ Liste d'achat finale :
 
-Possibilité de télécharger un fichier CSV.
+Tickers des actifs sélectionnés
+
+Poids de chaque actif
+
+Téléchargement du fichier CSV prêt à l’emploi
