@@ -1,4 +1,4 @@
-# 💹 Momentum-X
+# Momentum-X
 
 Application Streamlit de stratégie d’investissement **Cœur-Satellites** avec sélection dynamique par **momentum**.
 
