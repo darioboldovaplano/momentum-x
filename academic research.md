@@ -7,7 +7,7 @@
 
 ## ▸ Objectif du projet
 
-Momentum-X est un projet de recherche visant à étudier la pertinence d’une approche d’investissement systématique exploitant la prime de **momentum** dans un cadre d’allocation contrôlé par le risque.
+Momentum-X est un projet de recherche visant à étudier la pertinence d’une approche d’investissement systématique exploitant la prime de **momentum** et **l'optimisation** de portefeuille dans un cadre d’allocation contrôlé par le risque.
 
 L’objectif est d’évaluer dans quelle mesure une structuration de portefeuille combinant sélection momentum, diversification thématique et contraintes d’optimisation permet d’améliorer le couple rendement/risque par rapport à des allocations plus simples.
 
