@@ -663,12 +663,3 @@ with tab_strategy:
     )
 
     st.caption(f"Somme totale des poids = {df_buy['Poids'].sum():.2%}")
-
-    #chhoses restantes à faire:
-    
-    #le backtest
-    #le satellite EM qui reconnait que deux stocks
-    # enlever le start date 
-# -ptet ajouter des photos sur les thèmes satellites
-# -rajouter un bouton en bas pour aller à stratégie Momentum X direct apres avoir fait le KYC$
-#enlever le bandeau à gauche
